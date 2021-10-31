@@ -2,6 +2,8 @@ import "./App.css";
 import Message from "./components/Message.jsx";
 
 function App() {
+  const [messageList, setMessageList] = useState([]);
+
   const text = "Lalala";
   return (
     <div className="App wrapper">
