@@ -1,20 +1,23 @@
 import "./App.css";
-import Message from "./components/Message.jsx";
 import MessageList from "./components/MessageList";
 import { useState } from "react";
+import Form from "./components/Form";
 
 function App() {
   const [messageList, setMessageList] = useState([]);
 
-  const text = "Lalala";
+  const sendMessage = (message) => {
+    setMessageList([...messageList, message]);
+  };
+
   return (
     <div className="App wrapper">
       <header className="page-header">
-        <Message text={text} />
+        <h2> Messenger </h2>
       </header>
-      <div>
-        <MessageList messageList={messageList} />
-      </div>
+
+      <MessageList messageList={messageList} />
+      <Form onSend={sendMessage} />
     </div>
   );
 }

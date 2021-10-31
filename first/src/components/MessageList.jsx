@@ -1,11 +1,13 @@
-import Message from "./Message"
+import Message from "./Message";
 
 const MessageList = ({ messageList }) => {
-    return (<>
-    {messageList.map((message) => {
-        return <Message text={message.text} />
-    })}
-    </>)
-}
+  return (
+    <div>
+      {messageList.map((message) => {
+        return <Message text={message.text} />;
+      })}
+    </div>
+  );
+};
 
-export default MessageList
+export default MessageList;
