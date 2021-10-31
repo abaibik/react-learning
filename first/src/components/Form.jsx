@@ -22,6 +22,7 @@ const Form = ({ onSend }) => {
     <div>
       <input
         type="text"
+        autoFocus
         value={value}
         onChange={handleChange}
         onKeyDown={handleKeyDown}

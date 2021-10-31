@@ -1,14 +1,17 @@
 import "./App.css";
 import MessageList from "./components/MessageList";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Form from "./components/Form";
 
 function App() {
   const [messageList, setMessageList] = useState([]);
 
-  const sendMessage = (message) => {
-    setMessageList([...messageList, message]);
-  };
+  const sendMessage = useCallback(
+    (message) => {
+      setMessageList([...messageList, message]);
+    },
+    [setMessageList, messageList]
+  );
 
   useEffect(() => {
     if (messageList.length === 0) {
@@ -16,12 +19,14 @@ function App() {
     }
     const lastMessage = messageList.at(-1);
     if (lastMessage.author === "Me") {
-      sendMessage({
-        text: "Your message is very important for me",
-        author: "Bot",
-      });
+      setTimeout(() => {
+        sendMessage({
+          text: "Your message is very important for me",
+          author: "Bot",
+        });
+      }, 1500);
     }
-  }, [messageList]);
+  }, [messageList, sendMessage]);
 
   return (
     <div className="App wrapper">
