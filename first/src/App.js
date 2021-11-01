@@ -29,13 +29,17 @@ function App() {
   }, [messageList, sendMessage]);
 
   return (
-    <div className="App wrapper">
-      <header className="page-header">
-        <h2> Messenger </h2>
+    <div className="App">
+      <header>
+        <h2 className="heading"> Messenger </h2>
       </header>
 
-      <MessageList messageList={messageList} />
-      <Form onSend={sendMessage} />
+      <section className="chatBox">
+        <section className="chat-window">
+          <MessageList messageList={messageList} />
+        </section>
+        <Form onSend={sendMessage} />
+      </section>
     </div>
   );
 }

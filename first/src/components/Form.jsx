@@ -19,7 +19,7 @@ const Form = ({ onSend }) => {
   };
 
   return (
-    <div>
+    <div className="chat-input">
       <input
         type="text"
         autoFocus
