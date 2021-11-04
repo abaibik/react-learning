@@ -6,6 +6,8 @@ import { AUTHORS } from "./utils";
 import { v4 as uuidv4 } from "uuid";
 import { Box } from "@mui/system";
 import ChatList from "./components/ChatList";
+import { ThemeProvider } from "@mui/material/styles";
+import theme from "./Theme";
 
 function App() {
   const [messageList, setMessageList] = useState([]);
@@ -37,18 +39,20 @@ function App() {
   }, [messageList, sendMessage]);
 
   return (
-    <div className="App">
-      <header>
-        <h2 className="heading"> Messenger </h2>
-      </header>
+    <ThemeProvider theme={theme}>
+      <div className="App">
+        <header>
+          <h2 className="heading"> Messenger </h2>
+        </header>
 
-      <Box sx={{ display: "flex" }}>
-        <ChatList chatList={chatList} />
-        <MessageList messageList={messageList} />
-      </Box>
+        <Box sx={{ display: "flex" }}>
+          <ChatList chatList={chatList} />
+          <MessageList messageList={messageList} />
+        </Box>
 
-      <Form onSend={sendMessage} />
-    </div>
+        <Form onSend={sendMessage} />
+      </div>
+    </ThemeProvider>
   );
 }
 
