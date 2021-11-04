@@ -8,29 +8,18 @@ const Form = ({ onSend }) => {
     setValue(event.target.value);
   };
 
-  const handleButtonClick = () => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
     onSend({ text: value, author: AUTHORS.human });
     setValue("");
   };
 
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      handleButtonClick();
-    }
-  };
-
   return (
-    <div className="chat-input">
-      <input
-        type="text"
-        autoFocus
-        value={value}
-        onChange={handleChange}
-        onKeyDown={handleKeyDown}
-      />
+    <form className="chat-input" onSubmit={handleSubmit}>
+      <input type="text" autoFocus value={value} onChange={handleChange} />
 
-      <button onClick={handleButtonClick}>Send</button>
-    </div>
+      <button type="submit">Send</button>
+    </form>
   );
 };
 
