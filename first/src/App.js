@@ -2,6 +2,7 @@ import "./App.css";
 import MessageList from "./components/MessageList";
 import { useCallback, useEffect, useState } from "react";
 import Form from "./components/Form";
+import { AUTHORS } from "./utils";
 
 function App() {
   const [messageList, setMessageList] = useState([]);
@@ -18,11 +19,11 @@ function App() {
       return;
     }
     const lastMessage = messageList.at(-1);
-    if (lastMessage.author === "Me") {
+    if (lastMessage.author === AUTHORS.human) {
       setTimeout(() => {
         sendMessage({
           text: "Your message is very important for me",
-          author: "Bot",
+          author: AUTHORS.bot,
         });
       }, 1500);
     }

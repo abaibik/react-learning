@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { AUTHORS } from "../utils";
 
 const Form = ({ onSend }) => {
   const [value, setValue] = useState("");
@@ -8,7 +9,7 @@ const Form = ({ onSend }) => {
   };
 
   const handleButtonClick = () => {
-    onSend({ text: value, author: "Me" });
+    onSend({ text: value, author: AUTHORS.human });
     setValue("");
   };
 
