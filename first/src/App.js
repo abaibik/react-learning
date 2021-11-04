@@ -3,13 +3,14 @@ import MessageList from "./components/MessageList";
 import { useCallback, useEffect, useState } from "react";
 import Form from "./components/Form";
 import { AUTHORS } from "./utils";
+import { v4 as uuidv4 } from "uuid";
 
 function App() {
   const [messageList, setMessageList] = useState([]);
 
   const sendMessage = useCallback(
     (message) => {
-      setMessageList([...messageList, message]);
+      setMessageList([...messageList, { ...message, id: uuidv4() }]);
     },
     [setMessageList, messageList]
   );
