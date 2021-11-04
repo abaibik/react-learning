@@ -4,9 +4,12 @@ import { useCallback, useEffect, useState } from "react";
 import Form from "./components/Form";
 import { AUTHORS } from "./utils";
 import { v4 as uuidv4 } from "uuid";
+import { Box } from "@mui/system";
+import ChatList from "./components/ChatList";
 
 function App() {
   const [messageList, setMessageList] = useState([]);
+  const [chatList, setChatList] = useState([{ id: uuidv4(), name: "Chat 1" }]);
 
   const sendMessage = useCallback(
     (message) => {
@@ -39,12 +42,12 @@ function App() {
         <h2 className="heading"> Messenger </h2>
       </header>
 
-      <section className="chatBox">
-        <section className="chat-window">
-          <MessageList messageList={messageList} />
-        </section>
-        <Form onSend={sendMessage} />
-      </section>
+      <Box sx={{ display: "flex" }}>
+        <ChatList chatList={chatList} />
+        <MessageList messageList={messageList} />
+      </Box>
+
+      <Form onSend={sendMessage} />
     </div>
   );
 }
