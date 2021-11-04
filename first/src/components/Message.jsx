@@ -1,4 +1,10 @@
-const Message = ({ text }) => {
-  return <h1 className="flip-in-hor-bottom message-text">{text}</h1>;
+const Message = ({ message }) => {
+  const { text, author } = message;
+  return (
+    <div className="message">
+      <span className="message-author">{author}</span>:
+      <span className="message-text">{text}</span>
+    </div>
+  );
 };
 export default Message;
