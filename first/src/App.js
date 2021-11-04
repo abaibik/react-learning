@@ -20,12 +20,15 @@ function App() {
     }
     const lastMessage = messageList.at(-1);
     if (lastMessage.author === AUTHORS.human) {
-      setTimeout(() => {
+      const timeOut = setTimeout(() => {
         sendMessage({
           text: "Your message is very important for me",
           author: AUTHORS.bot,
         });
       }, 1500);
+      return () => {
+        clearTimeout(timeOut);
+      };
     }
   }, [messageList, sendMessage]);
 
