@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { AUTHORS } from "../utils";
 import Box from "@mui/material/Box";
 import Input from "@mui/material/Input";
@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 
 const Form = ({ onSend }) => {
   const [value, setValue] = useState("");
+  const textInput = useRef(null);
 
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -15,6 +16,7 @@ const Form = ({ onSend }) => {
     event.preventDefault();
     onSend({ text: value, author: AUTHORS.human });
     setValue("");
+    textInput.current.focus();
   };
 
   return (
@@ -30,6 +32,7 @@ const Form = ({ onSend }) => {
         autoFocus
         value={value}
         onChange={handleChange}
+        inputRef={textInput}
       />
 
       <Button onClick={handleSubmit} variant="outlined">
