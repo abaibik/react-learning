@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { AUTHORS } from "../utils";
+import Box from "@mui/material/Box";
+import Input from "@mui/material/Input";
+import Button from "@mui/material/Button";
 
 const Form = ({ onSend }) => {
   const [value, setValue] = useState("");
@@ -15,11 +18,24 @@ const Form = ({ onSend }) => {
   };
 
   return (
-    <form className="chat-input" onSubmit={handleSubmit}>
-      <input type="text" autoFocus value={value} onChange={handleChange} />
+    <Box
+      component="form"
+      noValidate
+      autoComplete="off"
+      className="chat-input"
+      onSubmit={handleSubmit}
+    >
+      <Input
+        placeholder="Placeholder"
+        autoFocus
+        value={value}
+        onChange={handleChange}
+      />
 
-      <button type="submit">Send</button>
-    </form>
+      <Button onClick={handleSubmit} variant="outlined">
+        Send
+      </Button>
+    </Box>
   );
 };
 
