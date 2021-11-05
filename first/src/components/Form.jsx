@@ -1,8 +1,8 @@
 import { useState, useRef } from "react";
 import { AUTHORS } from "../utils";
-import Box from "@mui/material/Box";
-import Input from "@mui/material/Input";
+import OutlinedInput from "@mui/material/OutlinedInput";
 import Button from "@mui/material/Button";
+import { Box } from "@mui/system";
 
 const Form = ({ onSend }) => {
   const [value, setValue] = useState("");
@@ -21,18 +21,29 @@ const Form = ({ onSend }) => {
 
   return (
     <Box
+      item
       component="form"
       noValidate
       autoComplete="off"
       className="chat-input"
       onSubmit={handleSubmit}
+      sx={{
+        display: "flex",
+        justifySelf: "flex-end",
+        p: 1,
+        m: 1,
+        gap: "10px",
+      }}
     >
-      <Input
-        placeholder="Placeholder"
+      <OutlinedInput
+        placeholder="Print your message"
         autoFocus
         value={value}
         onChange={handleChange}
         inputRef={textInput}
+        sx={{
+          flexGrow: 1,
+        }}
       />
 
       <Button onClick={handleSubmit} variant="outlined">

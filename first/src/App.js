@@ -8,10 +8,15 @@ import { Box } from "@mui/system";
 import ChatList from "./components/ChatList";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./Theme";
+import ChatIcon from "@mui/icons-material/Chat";
+import { Grid } from "@mui/material";
 
 function App() {
   const [messageList, setMessageList] = useState([]);
-  const [chatList, setChatList] = useState([{ id: uuidv4(), name: "Chat 1" }]);
+  // eslint-disable-next-line
+  const [chatList, setChatList] = useState([
+    { id: uuidv4(), name: "Chat 1", icon: ChatIcon },
+  ]);
 
   const sendMessage = useCallback(
     (message) => {
@@ -41,16 +46,27 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
-        <header>
-          <h2 className="heading"> Messenger </h2>
-        </header>
+        <div className="circle1"></div>
+        <div className="circle2"></div>
+        <Grid
+          container
+          className="glas"
+          sx={{ marginTop: "2vw", width: "min(60%,1200px)" }}
+        >
+          <Grid item xs={4}>
+            <ChatList chatList={chatList} />
+          </Grid>
 
-        <Box sx={{ display: "flex" }}>
-          <ChatList chatList={chatList} />
-          <MessageList messageList={messageList} />
-        </Box>
+          <Grid item xs={8}>
+            <Box
+              sx={{ display: "flex", flexDirection: "column", height: "100%" }}
+            >
+              <MessageList messageList={messageList} />
 
-        <Form onSend={sendMessage} />
+              <Form onSend={sendMessage} />
+            </Box>
+          </Grid>
+        </Grid>
       </div>
     </ThemeProvider>
   );
