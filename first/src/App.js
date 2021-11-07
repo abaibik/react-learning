@@ -45,7 +45,16 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <div className="App">
+      <Box
+        className="App"
+        sx={{
+          minHeight: "100vh",
+          background: "linear-gradient(to right top, #65dfc9, #6cdbeb)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <div className="circle1"></div>
         <div className="circle2"></div>
         <Grid
@@ -67,7 +76,7 @@ function App() {
             </Box>
           </Grid>
         </Grid>
-      </div>
+      </Box>
     </ThemeProvider>
   );
 }

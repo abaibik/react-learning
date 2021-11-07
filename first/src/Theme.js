@@ -1,9 +1,13 @@
-import { purple, green } from "@mui/material/colors";
+import { green, blue } from "@mui/material/colors";
 import { createTheme } from "@mui/material/styles";
 
-const theme = createTheme({
+let theme = createTheme({
+  typography: {
+    fontFamily: ["Poppins"].join(","),
+    fontSize: "2rem",
+  },
   palette: {
-    primary: purple,
+    primary: blue,
     secondary: green,
   },
   status: {

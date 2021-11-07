@@ -5,14 +5,6 @@
   font-family: "Nunito", sans-serif;
 }
 
-.App {
-  min-height: 100vh;
-  background: linear-gradient(to right top, #65dfc9, #6cdbeb);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .circle1,
 .circle2 {
   background: white;
@@ -37,7 +29,6 @@
 }
 
 .glas {
-  background: white;
   min-height: 80vh;
   width: 60%;
   background: linear-gradient(
@@ -49,20 +40,3 @@
   z-index: 2;
   backdrop-filter: blur(2rem);
 }
-
-.img-avatar {
-  height: 5rem;
-  width: 5rem;
-}
-
-/* .heading {
-  color: #4d8cd5;
-  font-family: "Great Vibes", cursive;
-  font-size: 80px;
-  line-height: 160px;
-  font-weight: normal;
-  margin-bottom: 0px;
-  margin-top: 40px;
-  text-align: center;
-  text-shadow: 0 1px 1px #fff;
-} */
