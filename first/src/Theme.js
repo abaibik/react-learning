@@ -4,7 +4,7 @@ import { createTheme } from "@mui/material/styles";
 let theme = createTheme({
   typography: {
     fontFamily: ["Poppins"].join(","),
-    fontSize: "2rem",
+    fontSize: 16,
   },
   palette: {
     primary: blue,

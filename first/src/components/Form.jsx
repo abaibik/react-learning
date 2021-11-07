@@ -1,22 +1,21 @@
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import { AUTHORS } from "../utils";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/system";
 
 const Form = ({ onSend }) => {
-  const [value, setValue] = useState("");
   const textInput = useRef(null);
 
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
-
   const handleSubmit = (event) => {
+    const value = textInput.current.value.trim();
     event.preventDefault();
+    if (value === "") {
+      return;
+    }
     onSend({ text: value, author: AUTHORS.human });
-    setValue("");
     textInput.current.focus();
+    textInput.current.value = "";
   };
 
   return (
@@ -32,14 +31,12 @@ const Form = ({ onSend }) => {
         justifySelf: "flex-end",
         p: 1,
         m: 1,
-        gap: "10px",
+        gap: "0.8rem",
       }}
     >
       <OutlinedInput
         placeholder="Print your message"
         autoFocus
-        value={value}
-        onChange={handleChange}
         inputRef={textInput}
         sx={{
           flexGrow: 1,

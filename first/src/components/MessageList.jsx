@@ -1,13 +1,12 @@
 import Message from "./Message";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
 import { Box } from "@mui/system";
 import Typography from "@mui/material/Typography";
 
 const MessageList = ({ messageList }) => {
   return (
-    <Box sx={{ height: "80%" }}>
+    <Box sx={{ flexGrow: 1 }}>
       <Typography
         variant="h1"
         sx={{
@@ -15,12 +14,12 @@ const MessageList = ({ messageList }) => {
           fontSize: "3rem",
           opacity: "0.8",
           fontWeight: "600",
-          margin: "5rem",
+          margin: "1rem",
         }}
       >
         Messenger
       </Typography>
-      <List>
+      <List sx={{ overflow: "auto", height: "70vh", marginRight: "0.3rem" }}>
         {messageList.map((message) => {
           return (
             <ListItem key={message.id}>

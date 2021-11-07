@@ -66,7 +66,7 @@ function App() {
             <ChatList chatList={chatList} />
           </Grid>
 
-          <Grid item xs={8}>
+          <Grid item xs={8} sx={{ borderLeft: 1, borderColor: "#6484ad" }}>
             <Box
               sx={{ display: "flex", flexDirection: "column", height: "100%" }}
             >
