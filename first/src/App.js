@@ -10,6 +10,8 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme from "./Theme";
 import ChatIcon from "@mui/icons-material/Chat";
 import { Grid } from "@mui/material";
+import { BrowserRouter as Router } from "react-router-dom";
+import Glass from "./components/Glass";
 
 function App() {
   const [messageList, setMessageList] = useState([]);
@@ -44,40 +46,31 @@ function App() {
   }, [messageList, sendMessage]);
 
   return (
-    <ThemeProvider theme={theme}>
-      <Box
-        className="App"
-        sx={{
-          minHeight: "100vh",
-          background: "linear-gradient(to right top, #65dfc9, #6cdbeb)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <div className="circle1"></div>
-        <div className="circle2"></div>
-        <Grid
-          container
-          className="glas"
-          sx={{ marginTop: "2vw", width: "min(60%,1200px)" }}
-        >
-          <Grid item xs={4}>
-            <ChatList chatList={chatList} />
-          </Grid>
+    <Router>
+      <ThemeProvider theme={theme}>
+        <Glass>
+          <Grid container>
+            <Grid item xs={4}>
+              <ChatList chatList={chatList} />
+            </Grid>
 
-          <Grid item xs={8} sx={{ borderLeft: 1, borderColor: "#6484ad" }}>
-            <Box
-              sx={{ display: "flex", flexDirection: "column", height: "100%" }}
-            >
-              <MessageList messageList={messageList} />
+            <Grid item xs={8} sx={{ borderLeft: 1, borderColor: "#6484ad" }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  height: "100%",
+                }}
+              >
+                <MessageList messageList={messageList} />
 
-              <Form onSend={sendMessage} />
-            </Box>
+                <Form onSend={sendMessage} />
+              </Box>
+            </Grid>
           </Grid>
-        </Grid>
-      </Box>
-    </ThemeProvider>
+        </Glass>
+      </ThemeProvider>
+    </Router>
   );
 }
 
