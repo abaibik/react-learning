@@ -1,17 +1,15 @@
 import "./App.css";
-import MessageList from "./components/MessageList";
 import { useCallback, useEffect, useState } from "react";
-import Form from "./components/Form";
 import { AUTHORS } from "./utils";
 import { v4 as uuidv4 } from "uuid";
-import { Box } from "@mui/system";
-import ChatList from "./components/ChatList";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./Theme";
 import ChatIcon from "@mui/icons-material/Chat";
-import { Grid } from "@mui/material";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Glass from "./components/Glass";
+import Profile from "./components/Profile";
+import Chats from "./components/Chats";
+import Home from "./components/Home";
 
 function App() {
   const [messageList, setMessageList] = useState([]);
@@ -49,25 +47,20 @@ function App() {
     <Router>
       <ThemeProvider theme={theme}>
         <Glass>
-          <Grid container>
-            <Grid item xs={4}>
-              <ChatList chatList={chatList} />
-            </Grid>
-
-            <Grid item xs={8} sx={{ borderLeft: 1, borderColor: "#6484ad" }}>
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  height: "100%",
-                }}
-              >
-                <MessageList messageList={messageList} />
-
-                <Form onSend={sendMessage} />
-              </Box>
-            </Grid>
-          </Grid>
+          <Routes>
+            <Route path="/profile" element={<Profile />} />
+            <Route
+              path="/chats"
+              element={
+                <Chats
+                  messageList={messageList}
+                  chatList={chatList}
+                  sendMessage={sendMessage}
+                />
+              }
+            />
+            <Route path="/" element={<Home />} />
+          </Routes>
         </Glass>
       </ThemeProvider>
     </Router>
