@@ -48,9 +48,9 @@ function App() {
       <ThemeProvider theme={theme}>
         <Glass>
           <Routes>
-            <Route path="/profile" element={<Profile />} />
+            <Route index path="/profile" element={<Profile />} />
             <Route
-              path="/chats"
+              path="/chats/"
               element={
                 <Chats
                   messageList={messageList}
@@ -58,7 +58,18 @@ function App() {
                   sendMessage={sendMessage}
                 />
               }
-            />
+            >
+              <Route
+                path=":chatId"
+                element={
+                  <Chats
+                    messageList={messageList}
+                    chatList={chatList}
+                    sendMessage={sendMessage}
+                  />
+                }
+              />
+            </Route>
             <Route path="/" element={<Home />} />
           </Routes>
         </Glass>
