@@ -4,7 +4,7 @@ import ChatIcon from "@mui/icons-material/Chat";
 import { Box } from "@mui/system";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
-import { useParams, useHref } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { ListItemButton } from "@mui/material";
 
 const ChatList = ({ chatList }) => {
@@ -28,23 +28,24 @@ const ChatList = ({ chatList }) => {
       <Box>
         <List>
           {chatList.map((chat) => {
-            const to = useHref(`/chats/${chat.id}`);
             return (
-              <ListItemButton
-                selected={chat.id === chatId}
-                key={chat.id}
-                sx={{
-                  display: "flex",
-                  margin: "2rem, 0rem",
-                  padding: "1rem, 5 rem",
-                  fontFamily: "Poppins",
-                }}
-              >
-                <ListItemIcon>
-                  <ChatIcon />
-                </ListItemIcon>
-                {chat.name}
-              </ListItemButton>
+              <Link to={`/${chatId}`} style={{ textDecoration: "none" }}>
+                <ListItemButton
+                  selected={chat.id === chatId}
+                  key={chat.id}
+                  sx={{
+                    display: "flex",
+                    margin: "2rem, 0rem",
+                    padding: "1rem, 5 rem",
+                    fontFamily: "Poppins",
+                  }}
+                >
+                  <ListItemIcon>
+                    <ChatIcon />
+                  </ListItemIcon>
+                  {chat.name}
+                </ListItemButton>
+              </Link>
             );
           })}
         </List>
