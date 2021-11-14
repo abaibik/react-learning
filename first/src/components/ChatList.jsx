@@ -29,7 +29,7 @@ const ChatList = ({ chatList }) => {
         <List>
           {chatList.map((chat) => {
             return (
-              <Link to={`/${chatId}`} style={{ textDecoration: "none" }}>
+              <Link to={`/chats/${chat.id}`} style={{ textDecoration: "none" }}>
                 <ListItemButton
                   selected={chat.id === chatId}
                   key={chat.id}
