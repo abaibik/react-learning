@@ -19,7 +19,7 @@ export default function Chats({ chatList, messageList, sendMessage }) {
             height: "100%",
           }}
         >
-          <MessageList messageList={messageList} />
+          <MessageList messageList={messageList} chatList={chatList} />
 
           <Form onSend={sendMessage} />
         </Box>

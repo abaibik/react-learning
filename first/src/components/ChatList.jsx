@@ -19,7 +19,7 @@ const ChatList = ({ chatList }) => {
         }}
       >
         <Avatar
-          src="./images/avatar.png"
+          src="/images/avatar.png"
           sx={{ height: 80, width: 80 }}
           alt="avatar"
         />
@@ -29,10 +29,13 @@ const ChatList = ({ chatList }) => {
         <List>
           {chatList.map((chat) => {
             return (
-              <Link to={`/chats/${chat.id}`} style={{ textDecoration: "none" }}>
+              <Link
+                key={chat.id}
+                to={`/chats/${chat.id}`}
+                style={{ textDecoration: "none" }}
+              >
                 <ListItemButton
                   selected={chat.id === chatId}
-                  key={chat.id}
                   sx={{
                     display: "flex",
                     margin: "2rem, 0rem",
