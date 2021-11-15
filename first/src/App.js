@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./Theme";
 import ChatIcon from "@mui/icons-material/Chat";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route, useParams } from "react-router-dom";
 import Glass from "./components/Glass";
 import Profile from "./components/Profile";
 import Chats from "./components/Chats";
@@ -16,7 +16,21 @@ function App() {
   // eslint-disable-next-line
   const [chatList, setChatList] = useState([
     { id: uuidv4(), name: "Chat 1", icon: ChatIcon },
+    { id: uuidv4(), name: "Chat 2", icon: ChatIcon },
   ]);
+
+  const [currentChatId, setCurrentChatId] = useState();
+
+  const findChat = useCallback(() => {
+    return chatList.find((c) => {
+      return c.id === currentChatId;
+    });
+  }, [currentChatId, chatList]);
+  const [currentChat, setCurrentChat] = useState(findChat());
+
+  useEffect(() => {
+    setCurrentChat(findChat());
+  }, [findChat]);
 
   const sendMessage = useCallback(
     (message) => {
@@ -44,37 +58,39 @@ function App() {
   }, [messageList, sendMessage]);
 
   return (
-    <Router>
-      <ThemeProvider theme={theme}>
-        <Glass>
-          <Routes>
-            <Route index path="/profile" element={<Profile />} />
+    <ThemeProvider theme={theme}>
+      <Glass>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route index path="/profile" element={<Profile />} />
+          <Route
+            path="/chats"
+            element={
+              <Chats
+                messageList={messageList}
+                chatList={chatList}
+                sendMessage={sendMessage}
+                currentChat={currentChat}
+                setCurrentChatId={setCurrentChatId}
+              />
+            }
+          >
             <Route
-              path="/chats/"
+              path=":chatId"
               element={
                 <Chats
                   messageList={messageList}
                   chatList={chatList}
                   sendMessage={sendMessage}
+                  currentChat={currentChat}
+                  setCurrentChatId={setCurrentChatId}
                 />
               }
-            >
-              <Route
-                path=":chatId"
-                element={
-                  <Chats
-                    messageList={messageList}
-                    chatList={chatList}
-                    sendMessage={sendMessage}
-                  />
-                }
-              />
-            </Route>
-            <Route path="/" element={<Home />} />
-          </Routes>
-        </Glass>
-      </ThemeProvider>
-    </Router>
+            />
+          </Route>
+        </Routes>
+      </Glass>
+    </ThemeProvider>
   );
 }
 
