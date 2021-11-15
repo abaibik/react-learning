@@ -4,7 +4,7 @@ import ChatIcon from "@mui/icons-material/Chat";
 import { Box } from "@mui/system";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ListItemButton } from "@mui/material";
 
 const ChatList = ({ chatList, currentChat }) => {

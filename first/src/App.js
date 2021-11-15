@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./Theme";
 import ChatIcon from "@mui/icons-material/Chat";
-import { Routes, Route, useParams } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Glass from "./components/Glass";
 import Profile from "./components/Profile";
 import Chats from "./components/Chats";
