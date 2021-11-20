@@ -3,8 +3,15 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import { Box } from "@mui/system";
 import Typography from "@mui/material/Typography";
+import { useCallback } from "react";
 
-const MessageList = ({ messageList }) => {
+const MessageList = ({ messageList, currentChat }) => {
+  const getHeading = useCallback(() => {
+    if (currentChat) {
+      return currentChat.name;
+    }
+    return "Messenger";
+  }, [currentChat]);
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Typography
@@ -17,7 +24,7 @@ const MessageList = ({ messageList }) => {
           margin: "1rem",
         }}
       >
-        Messenger
+        {getHeading()}
       </Typography>
       <List sx={{ overflow: "auto", height: "70vh", marginRight: "0.3rem" }}>
         {messageList.map((message) => {

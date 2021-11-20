@@ -1,22 +1,36 @@
 import "./App.css";
-import MessageList from "./components/MessageList";
 import { useCallback, useEffect, useState } from "react";
-import Form from "./components/Form";
 import { AUTHORS } from "./utils";
 import { v4 as uuidv4 } from "uuid";
-import { Box } from "@mui/system";
-import ChatList from "./components/ChatList";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./Theme";
 import ChatIcon from "@mui/icons-material/Chat";
-import { Grid } from "@mui/material";
+import { Routes, Route } from "react-router-dom";
+import Glass from "./components/Glass";
+import Profile from "./components/Profile";
+import Chats from "./components/Chats";
+import Home from "./components/Home";
 
 function App() {
   const [messageList, setMessageList] = useState([]);
   // eslint-disable-next-line
   const [chatList, setChatList] = useState([
     { id: uuidv4(), name: "Chat 1", icon: ChatIcon },
+    { id: uuidv4(), name: "Chat 2", icon: ChatIcon },
   ]);
+
+  const [currentChatId, setCurrentChatId] = useState();
+
+  const findChat = useCallback(() => {
+    return chatList.find((c) => {
+      return c.id === currentChatId;
+    });
+  }, [currentChatId, chatList]);
+  const [currentChat, setCurrentChat] = useState(findChat());
+
+  useEffect(() => {
+    setCurrentChat(findChat());
+  }, [findChat]);
 
   const sendMessage = useCallback(
     (message) => {
@@ -45,38 +59,37 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Box
-        className="App"
-        sx={{
-          minHeight: "100vh",
-          background: "linear-gradient(to right top, #65dfc9, #6cdbeb)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <div className="circle1"></div>
-        <div className="circle2"></div>
-        <Grid
-          container
-          className="glas"
-          sx={{ marginTop: "2vw", width: "min(60%,1200px)" }}
-        >
-          <Grid item xs={4}>
-            <ChatList chatList={chatList} />
-          </Grid>
-
-          <Grid item xs={8} sx={{ borderLeft: 1, borderColor: "#6484ad" }}>
-            <Box
-              sx={{ display: "flex", flexDirection: "column", height: "100%" }}
-            >
-              <MessageList messageList={messageList} />
-
-              <Form onSend={sendMessage} />
-            </Box>
-          </Grid>
-        </Grid>
-      </Box>
+      <Glass>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route index path="/profile" element={<Profile />} />
+          <Route
+            path="/chats"
+            element={
+              <Chats
+                messageList={messageList}
+                chatList={chatList}
+                sendMessage={sendMessage}
+                currentChat={currentChat}
+                setCurrentChatId={setCurrentChatId}
+              />
+            }
+          >
+            <Route
+              path=":chatId"
+              element={
+                <Chats
+                  messageList={messageList}
+                  chatList={chatList}
+                  sendMessage={sendMessage}
+                  currentChat={currentChat}
+                  setCurrentChatId={setCurrentChatId}
+                />
+              }
+            />
+          </Route>
+        </Routes>
+      </Glass>
     </ThemeProvider>
   );
 }

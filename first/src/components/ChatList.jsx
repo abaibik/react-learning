@@ -1,12 +1,14 @@
 import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ChatIcon from "@mui/icons-material/Chat";
 import { Box } from "@mui/system";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
+import { Link } from "react-router-dom";
+import { ListItemButton } from "@mui/material";
 
-const ChatList = ({ chatList }) => {
+const ChatList = ({ chatList, currentChat }) => {
+  const currentChatId = currentChat ? currentChat.id : undefined;
   return (
     <Box sx={{ display: "flex", flexDirection: "column", marginLeft: "2vw" }}>
       <Box
@@ -17,7 +19,7 @@ const ChatList = ({ chatList }) => {
         }}
       >
         <Avatar
-          src="./images/avatar.png"
+          src="/images/avatar.png"
           sx={{ height: 80, width: 80 }}
           alt="avatar"
         />
@@ -27,20 +29,26 @@ const ChatList = ({ chatList }) => {
         <List>
           {chatList.map((chat) => {
             return (
-              <ListItem
+              <Link
                 key={chat.id}
-                sx={{
-                  display: "flex",
-                  margin: "2rem, 0rem",
-                  padding: "1rem, 5 rem",
-                  fontFamily: "Poppins",
-                }}
+                to={`/chats/${chat.id}`}
+                style={{ textDecoration: "none" }}
               >
-                <ListItemIcon>
-                  <ChatIcon />
-                </ListItemIcon>
-                {chat.name}
-              </ListItem>
+                <ListItemButton
+                  selected={chat.id === currentChatId}
+                  sx={{
+                    display: "flex",
+                    margin: "2rem, 0rem",
+                    padding: "1rem, 5 rem",
+                    fontFamily: "Poppins",
+                  }}
+                >
+                  <ListItemIcon>
+                    <ChatIcon />
+                  </ListItemIcon>
+                  {chat.name}
+                </ListItemButton>
+              </Link>
             );
           })}
         </List>
