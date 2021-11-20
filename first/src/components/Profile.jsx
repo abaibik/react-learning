@@ -8,7 +8,7 @@ export default function Profile() {
   const dispatch = useDispatch();
 
   const setShowName = useCallback(() => {
-    dispatch(toggleNameCheckbox);
+    dispatch(toggleNameCheckbox());
   }, [dispatch]);
   return (
     <Box>
