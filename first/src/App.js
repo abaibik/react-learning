@@ -70,7 +70,6 @@ function App() {
                 messageList={messageList}
                 sendMessage={sendMessage}
                 currentChat={currentChat}
-                setCurrentChatId={setCurrentChatId}
               />
             }
           >
@@ -81,7 +80,6 @@ function App() {
                   messageList={messageList}
                   sendMessage={sendMessage}
                   currentChat={currentChat}
-                  setCurrentChatId={setCurrentChatId}
                 />
               }
             />

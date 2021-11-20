@@ -1,4 +1,4 @@
-import { ADD_CHAT } from "./actions";
+import { ADD_CHAT, SET_CURRENT_CHAT } from "./actions";
 import { v4 as uuidv4 } from "uuid";
 
 const currentChatId = uuidv4();
@@ -23,6 +23,11 @@ const chatsReducer = (state = initialState, action) => {
             name: action.payload,
           },
         ],
+      };
+    case SET_CURRENT_CHAT:
+      return {
+        ...state,
+        currentChatId: action.payload,
       };
     default:
       return state;
