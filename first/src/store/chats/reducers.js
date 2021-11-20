@@ -1,7 +1,14 @@
 import { ADD_CHAT } from "./actions";
+import { v4 as uuidv4 } from "uuid";
+
+const currentChatId = uuidv4();
 
 const initialState = {
-  chatList: [],
+  chatList: [
+    { id: currentChatId, name: "Chat 1" },
+    { id: uuidv4(), name: "Chat 2" },
+  ],
+  currentChatId,
 };
 
 const chatsReducer = (state = initialState, action) => {
@@ -12,7 +19,7 @@ const chatsReducer = (state = initialState, action) => {
         chatList: [
           ...state.chatList,
           {
-            id: `id${state.chatList.length}`,
+            id: uuidv4(),
             name: action.payload,
           },
         ],

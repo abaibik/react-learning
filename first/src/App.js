@@ -68,7 +68,6 @@ function App() {
             element={
               <Chats
                 messageList={messageList}
-                chatList={chatList}
                 sendMessage={sendMessage}
                 currentChat={currentChat}
                 setCurrentChatId={setCurrentChatId}
@@ -80,7 +79,6 @@ function App() {
               element={
                 <Chats
                   messageList={messageList}
-                  chatList={chatList}
                   sendMessage={sendMessage}
                   currentChat={currentChat}
                   setCurrentChatId={setCurrentChatId}

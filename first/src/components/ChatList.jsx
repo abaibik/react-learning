@@ -6,9 +6,11 @@ import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 import { ListItemButton } from "@mui/material";
+import { useSelector } from "react-redux";
 
-const ChatList = ({ chatList, currentChat }) => {
-  const currentChatId = currentChat ? currentChat.id : undefined;
+const ChatList = () => {
+  const { chatList, currentChatId } = useSelector((state) => state.chats);
+
   return (
     <Box sx={{ display: "flex", flexDirection: "column", marginLeft: "2vw" }}>
       <Box

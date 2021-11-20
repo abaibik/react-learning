@@ -7,7 +7,6 @@ import Form from "./Form";
 import MessageList from "./MessageList";
 
 export default function Chats({
-  chatList,
   messageList,
   sendMessage,
   currentChat,
@@ -21,7 +20,7 @@ export default function Chats({
   return (
     <Grid container>
       <Grid item xs={4}>
-        <ChatList chatList={chatList} currentChat={currentChat} />
+        <ChatList />
       </Grid>
 
       <Grid item xs={8} sx={{ borderLeft: 1, borderColor: "#6484ad" }}>
