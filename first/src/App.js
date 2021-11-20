@@ -4,7 +4,6 @@ import { AUTHORS } from "./utils";
 import { v4 as uuidv4 } from "uuid";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./Theme";
-import ChatIcon from "@mui/icons-material/Chat";
 import { Routes, Route } from "react-router-dom";
 import Glass from "./components/Glass";
 import Profile from "./components/Profile";
@@ -13,24 +12,6 @@ import Home from "./components/Home";
 
 function App() {
   const [messageList, setMessageList] = useState([]);
-  // eslint-disable-next-line
-  const [chatList, setChatList] = useState([
-    { id: uuidv4(), name: "Chat 1", icon: ChatIcon },
-    { id: uuidv4(), name: "Chat 2", icon: ChatIcon },
-  ]);
-
-  const [currentChatId, setCurrentChatId] = useState();
-
-  const findChat = useCallback(() => {
-    return chatList.find((c) => {
-      return c.id === currentChatId;
-    });
-  }, [currentChatId, chatList]);
-  const [currentChat, setCurrentChat] = useState(findChat());
-
-  useEffect(() => {
-    setCurrentChat(findChat());
-  }, [findChat]);
 
   const sendMessage = useCallback(
     (message) => {
@@ -66,21 +47,13 @@ function App() {
           <Route
             path="/chats"
             element={
-              <Chats
-                messageList={messageList}
-                sendMessage={sendMessage}
-                currentChat={currentChat}
-              />
+              <Chats messageList={messageList} sendMessage={sendMessage} />
             }
           >
             <Route
               path=":chatId"
               element={
-                <Chats
-                  messageList={messageList}
-                  sendMessage={sendMessage}
-                  currentChat={currentChat}
-                />
+                <Chats messageList={messageList} sendMessage={sendMessage} />
               }
             />
           </Route>

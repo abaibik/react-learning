@@ -8,7 +8,7 @@ import ChatList from "./ChatList";
 import Form from "./Form";
 import MessageList from "./MessageList";
 
-export default function Chats({ messageList, sendMessage, currentChat }) {
+export default function Chats({ messageList, sendMessage }) {
   const { chatId } = useParams();
 
   const dispatch = useDispatch();
@@ -38,7 +38,7 @@ export default function Chats({ messageList, sendMessage, currentChat }) {
             height: "100%",
           }}
         >
-          <MessageList messageList={messageList} currentChat={currentChat} />
+          <MessageList messageList={messageList} />
 
           <Form onSend={sendMessage} />
         </Box>

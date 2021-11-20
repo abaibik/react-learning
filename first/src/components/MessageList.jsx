@@ -4,14 +4,19 @@ import ListItem from "@mui/material/ListItem";
 import { Box } from "@mui/system";
 import Typography from "@mui/material/Typography";
 import { useCallback } from "react";
+import { useSelector } from "react-redux";
 
-const MessageList = ({ messageList, currentChat }) => {
+const MessageList = ({ messageList }) => {
+  const { chatList, currentChatId } = useSelector((state) => state.chats);
   const getHeading = useCallback(() => {
-    if (currentChat) {
+    if (currentChatId) {
+      const currentChat = chatList.find((chat) => {
+        return chat.id === currentChatId;
+      });
       return currentChat.name;
     }
     return "Messenger";
-  }, [currentChat]);
+  }, [chatList, currentChatId]);
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Typography
