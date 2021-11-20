@@ -12,7 +12,7 @@ export const removeChat = (id) => ({
   payload: id,
 });
 
-export const sendMessage = (message) => ({
+export const sendMessage = (message, chatId) => ({
   type: SEND_MESSAGE,
-  payload: message,
+  payload: { message, chatId },
 });

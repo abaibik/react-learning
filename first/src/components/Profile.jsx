@@ -4,7 +4,7 @@ import { toggleNameCheckbox } from "../store/profile/actions";
 import { useSelector, useDispatch } from "react-redux";
 
 export default function Profile() {
-  const { showName, name } = useSelector((state) => state);
+  const { showName, name } = useSelector((state) => state.profile);
   const dispatch = useDispatch();
 
   const setShowName = useCallback(() => {
