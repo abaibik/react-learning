@@ -6,17 +6,17 @@ import Typography from "@mui/material/Typography";
 import { useCallback } from "react";
 import { useSelector } from "react-redux";
 
-const MessageList = ({ messageList }) => {
+const MessageList = () => {
   const { chatList, currentChatId } = useSelector((state) => state.chats);
+  const currentChat = chatList.find((chat) => {
+    return chat.id === currentChatId;
+  });
   const getHeading = useCallback(() => {
-    if (currentChatId) {
-      const currentChat = chatList.find((chat) => {
-        return chat.id === currentChatId;
-      });
+    if (currentChat) {
       return currentChat.name;
     }
     return "Messenger";
-  }, [chatList, currentChatId]);
+  }, [currentChat]);
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Typography
@@ -32,13 +32,14 @@ const MessageList = ({ messageList }) => {
         {getHeading()}
       </Typography>
       <List sx={{ overflow: "auto", height: "70vh", marginRight: "0.3rem" }}>
-        {messageList.map((message) => {
-          return (
-            <ListItem key={message.id}>
-              <Message message={message} />
-            </ListItem>
-          );
-        })}
+        {currentChat &&
+          currentChat.messages.map((message) => {
+            return (
+              <ListItem key={message.id}>
+                <Message message={message} />
+              </ListItem>
+            );
+          })}
       </List>
     </Box>
   );

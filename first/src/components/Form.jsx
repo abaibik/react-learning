@@ -3,9 +3,13 @@ import { AUTHORS } from "../utils";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/system";
+import { useDispatch, useSelector } from "react-redux";
+import { sendMessage } from "../store/chats/actions";
 
-const Form = ({ onSend }) => {
+const Form = () => {
   const textInput = useRef(null);
+  const dispatch = useDispatch();
+  const currentChatId = useSelector((state) => state.chats.currentChatId);
 
   const handleSubmit = (event) => {
     const value = textInput.current.value.trim();
@@ -13,7 +17,9 @@ const Form = ({ onSend }) => {
     if (value === "") {
       return;
     }
-    onSend({ text: value, author: AUTHORS.human });
+    dispatch(
+      sendMessage({ text: value, author: AUTHORS.human }, currentChatId)
+    );
     textInput.current.focus();
     textInput.current.value = "";
   };

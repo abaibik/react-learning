@@ -44,18 +44,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route index path="/profile" element={<Profile />} />
-          <Route
-            path="/chats"
-            element={
-              <Chats messageList={messageList} sendMessage={sendMessage} />
-            }
-          >
-            <Route
-              path=":chatId"
-              element={
-                <Chats messageList={messageList} sendMessage={sendMessage} />
-              }
-            />
+          <Route path="/chats" element={<Chats />}>
+            <Route path=":chatId" element={<Chats />} />
           </Route>
         </Routes>
       </Glass>
