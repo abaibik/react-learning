@@ -8,10 +8,16 @@ import {
 import { Link } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ChatIcon from "@mui/icons-material/Chat";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useCallback } from "react";
+import { removeChat } from "../store/chats/actions";
 
 export default function Chat({ chat }) {
   const currentChatId = useSelector((state) => state.chats.currentChatId);
+  const dispatch = useDispatch();
+  const deleteChat = useCallback(() => {
+    dispatch(removeChat(chat.id));
+  }, [chat.id, dispatch]);
   return (
     <Link to={`/chats/${chat.id}`} style={{ textDecoration: "none" }}>
       <ListItemButton
@@ -30,7 +36,7 @@ export default function Chat({ chat }) {
         <Typography sx={{ flexGrow: 1 }}>{chat.name}</Typography>
 
         <Tooltip title="Delete chat">
-          <IconButton>
+          <IconButton onClick={deleteChat}>
             <DeleteIcon />
           </IconButton>
         </Tooltip>
