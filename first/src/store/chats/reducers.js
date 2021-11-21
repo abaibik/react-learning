@@ -31,7 +31,7 @@ const chatsReducer = (state = initialState, action) => {
       };
     case SEND_MESSAGE:
       const { message, chatId } = action.payload;
-      const chatList = state.chatList;
+      const chatList = [...state.chatList];
       const targetChatIdx = chatList.findIndex((chat) => {
         return chat.id === chatId;
       });
