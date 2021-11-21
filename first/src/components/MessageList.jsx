@@ -26,7 +26,7 @@ const MessageList = () => {
           fontSize: "3rem",
           opacity: "0.8",
           fontWeight: "600",
-          margin: "1rem",
+          margin: "1rem 1rem 1rem 2rem",
         }}
       >
         {getHeading()}

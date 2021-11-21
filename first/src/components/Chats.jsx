@@ -30,7 +30,14 @@ export default function Chats() {
         <ChatList />
       </Grid>
 
-      <Grid item xs={8} sx={{ borderLeft: 1, borderColor: "#6484ad" }}>
+      <Grid
+        item
+        xs={8}
+        sx={{
+          borderLeft: 2,
+          borderColor: "#6cdbeb",
+        }}
+      >
         <Box
           sx={{
             display: "flex",
