@@ -26,6 +26,7 @@ const chatsReducer = (state = initialState, action) => {
           {
             id: uuidv4(),
             name: action.payload,
+            messages: [],
           },
         ],
       };

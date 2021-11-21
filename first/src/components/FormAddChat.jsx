@@ -1,11 +1,28 @@
 import { Button, OutlinedInput, Typography } from "@mui/material";
 import { Box } from "@mui/system";
+import { useRef } from "react";
+import { useDispatch } from "react-redux";
+import { addChat } from "../store/chats/actions";
 
 export default function FormAddChat() {
+  const inputRef = useRef();
+  const dispatch = useDispatch();
+
+  const handleSubmit = (event) => {
+    const value = inputRef.current.value.trim();
+    event.preventDefault();
+    if (value === "") {
+      return;
+    }
+    dispatch(addChat(value));
+    inputRef.current.focus();
+    inputRef.current.value = "";
+  };
   return (
     <Box
       item
       component="form"
+      onSubmit={handleSubmit}
       noValidate
       autoComplete="off"
       sx={{
@@ -30,7 +47,7 @@ export default function FormAddChat() {
         Add a new chat
       </Typography>
 
-      <OutlinedInput placeholder="Name" />
+      <OutlinedInput placeholder="Name" inputRef={inputRef} />
 
       <Button variant="outlined">Add</Button>
     </Box>
