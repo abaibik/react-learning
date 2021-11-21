@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { AUTHORS } from "../utils";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import Button from "@mui/material/Button";
@@ -24,6 +24,10 @@ const Form = () => {
     textInput.current.value = "";
   };
 
+  useEffect(() => {
+    textInput.current.focus();
+  }, [currentChatId]);
+
   return (
     <Box
       item
@@ -44,6 +48,7 @@ const Form = () => {
         placeholder="Print your message"
         autoFocus
         inputRef={textInput}
+        disabled={!currentChatId}
         sx={{
           flexGrow: 1,
         }}
