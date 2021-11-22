@@ -1,20 +1,16 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { sendMessage } from "../store/chats/actions";
+import {
+  selectCurrentChatId,
+  selectLastMessage,
+} from "../store/chats/selectors";
 import { AUTHORS } from "../utils";
 
 export default function Bot() {
   const dispatch = useDispatch();
-  const lastMessage = useSelector((state) => {
-    const currentChat = state.chats.chatList.find((chat) => {
-      return chat.id === state.chats.currentChatId;
-    });
-    if (!currentChat || currentChat.messages.length === 0) {
-      return undefined;
-    }
-    return currentChat.messages.at(-1);
-  });
-  const currentChatId = useSelector((state) => state.chats.currentChatId);
+  const lastMessage = useSelector(selectLastMessage);
+  const currentChatId = useSelector(selectCurrentChatId);
 
   useEffect(() => {
     if (lastMessage === undefined) {

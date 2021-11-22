@@ -5,9 +5,10 @@ import Typography from "@mui/material/Typography";
 import { useSelector } from "react-redux";
 import Chat from "./Chat";
 import FormAddChat from "./FormAddChat";
+import { selectChatList } from "../store/chats/selectors";
 
 const ChatList = () => {
-  const chatList = useSelector((state) => state.chats.chatList);
+  const chatList = useSelector(selectChatList);
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", marginLeft: "2vw" }}>

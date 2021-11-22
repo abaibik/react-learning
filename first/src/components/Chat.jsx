@@ -11,9 +11,10 @@ import ChatIcon from "@mui/icons-material/Chat";
 import { useDispatch, useSelector } from "react-redux";
 import { useCallback } from "react";
 import { removeChat } from "../store/chats/actions";
+import { selectCurrentChatId } from "../store/chats/selectors";
 
 export default function Chat({ chat }) {
-  const currentChatId = useSelector((state) => state.chats.currentChatId);
+  const currentChatId = useSelector(selectCurrentChatId);
   const dispatch = useDispatch();
   const deleteChat = useCallback(() => {
     dispatch(removeChat(chat.id));

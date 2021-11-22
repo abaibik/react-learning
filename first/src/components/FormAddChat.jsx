@@ -49,7 +49,9 @@ export default function FormAddChat() {
 
       <OutlinedInput placeholder="Name" inputRef={inputRef} />
 
-      <Button variant="outlined">Add</Button>
+      <Button type="submit" variant="outlined">
+        Add
+      </Button>
     </Box>
   );
 }

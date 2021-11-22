@@ -44,7 +44,9 @@ const chatsReducer = (state = initialState, action) => {
       if (targetChatIdx === -1) {
         return state;
       }
-      chatList[targetChatIdx].messages.push({ ...message, id: uuidv4() });
+      const targetChat = chatList[targetChatIdx];
+      const messages = [...targetChat.messages, { ...message, id: uuidv4() }];
+      chatList[targetChatIdx] = { ...targetChat, messages };
       return {
         ...state,
         chatList,

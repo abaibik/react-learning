@@ -5,12 +5,14 @@ import { Box } from "@mui/system";
 import Typography from "@mui/material/Typography";
 import { useCallback } from "react";
 import { useSelector } from "react-redux";
+import {
+  selectCurrentChat,
+  selectCurrentChatMessages,
+} from "../store/chats/selectors";
 
 const MessageList = () => {
-  const { chatList, currentChatId } = useSelector((state) => state.chats);
-  const currentChat = chatList.find((chat) => {
-    return chat.id === currentChatId;
-  });
+  const currentChat = useSelector(selectCurrentChat);
+  const messages = useSelector(selectCurrentChatMessages);
   const getHeading = useCallback(() => {
     if (currentChat) {
       return currentChat.name;
@@ -32,14 +34,13 @@ const MessageList = () => {
         {getHeading()}
       </Typography>
       <List sx={{ overflow: "auto", height: "70vh", marginRight: "0.3rem" }}>
-        {currentChat &&
-          currentChat.messages.map((message) => {
-            return (
-              <ListItem key={message.id}>
-                <Message message={message} />
-              </ListItem>
-            );
-          })}
+        {messages.map((message) => {
+          return (
+            <ListItem key={message.id}>
+              <Message message={message} />
+            </ListItem>
+          );
+        })}
       </List>
     </Box>
   );
