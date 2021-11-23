@@ -1,30 +1,43 @@
 import { Grid } from "@mui/material";
 import { Box } from "@mui/system";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router";
+import { setCurrentChat } from "../store/chats/actions";
 import ChatList from "./ChatList";
 import Form from "./Form";
 import MessageList from "./MessageList";
 
-export default function Chats({
-  chatList,
-  messageList,
-  sendMessage,
-  currentChat,
-  setCurrentChatId,
-}) {
+export default function Chats() {
   const { chatId } = useParams();
+
+  const dispatch = useDispatch();
+
+  const setChat = useCallback(
+    (id) => {
+      dispatch(setCurrentChat(id));
+    },
+    [dispatch]
+  );
+
   useEffect(() => {
-    setCurrentChatId(chatId);
-  }, [chatId, setCurrentChatId]);
+    setChat(chatId);
+  }, [chatId, setChat]);
 
   return (
     <Grid container>
       <Grid item xs={4}>
-        <ChatList chatList={chatList} currentChat={currentChat} />
+        <ChatList />
       </Grid>
 
-      <Grid item xs={8} sx={{ borderLeft: 1, borderColor: "#6484ad" }}>
+      <Grid
+        item
+        xs={8}
+        sx={{
+          borderLeft: 2,
+          borderColor: "#6cdbeb",
+        }}
+      >
         <Box
           sx={{
             display: "flex",
@@ -32,9 +45,9 @@ export default function Chats({
             height: "100%",
           }}
         >
-          <MessageList messageList={messageList} currentChat={currentChat} />
+          <MessageList />
 
-          <Form onSend={sendMessage} />
+          <Form />
         </Box>
       </Grid>
     </Grid>

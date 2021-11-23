@@ -1,14 +1,15 @@
 import List from "@mui/material/List";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ChatIcon from "@mui/icons-material/Chat";
 import { Box } from "@mui/system";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
-import { Link } from "react-router-dom";
-import { ListItemButton } from "@mui/material";
+import { useSelector } from "react-redux";
+import Chat from "./Chat";
+import FormAddChat from "./FormAddChat";
+import { selectChatList } from "../store/chats/selectors";
 
-const ChatList = ({ chatList, currentChat }) => {
-  const currentChatId = currentChat ? currentChat.id : undefined;
+const ChatList = () => {
+  const chatList = useSelector(selectChatList);
+
   return (
     <Box sx={{ display: "flex", flexDirection: "column", marginLeft: "2vw" }}>
       <Box
@@ -20,39 +21,31 @@ const ChatList = ({ chatList, currentChat }) => {
       >
         <Avatar
           src="/images/avatar.png"
-          sx={{ height: 80, width: 80 }}
+          sx={{ height: 80, width: 80, alignSelf: "center" }}
           alt="avatar"
         />
-        <Typography variant="body2">Jane Dow</Typography>
+        <Typography
+          variant="h1"
+          sx={{
+            color: "#426696",
+            fontSize: "1rem",
+            opacity: "0.8",
+            fontWeight: "600",
+            mt: "1rem",
+            textAlign: "center",
+          }}
+        >
+          Jane Dow
+        </Typography>
       </Box>
       <Box>
         <List>
           {chatList.map((chat) => {
-            return (
-              <Link
-                key={chat.id}
-                to={`/chats/${chat.id}`}
-                style={{ textDecoration: "none" }}
-              >
-                <ListItemButton
-                  selected={chat.id === currentChatId}
-                  sx={{
-                    display: "flex",
-                    margin: "2rem, 0rem",
-                    padding: "1rem, 5 rem",
-                    fontFamily: "Poppins",
-                  }}
-                >
-                  <ListItemIcon>
-                    <ChatIcon />
-                  </ListItemIcon>
-                  {chat.name}
-                </ListItemButton>
-              </Link>
-            );
+            return <Chat key={chat.id} chat={chat} />;
           })}
         </List>
       </Box>
+      <FormAddChat />
     </Box>
   );
 };
