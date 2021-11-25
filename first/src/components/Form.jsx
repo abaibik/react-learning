@@ -1,10 +1,9 @@
 import { useEffect, useRef } from "react";
-import { AUTHORS } from "../utils";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/system";
 import { useDispatch, useSelector } from "react-redux";
-import { sendMessage } from "../store/chats/actions";
+import { addMessageWithBotReply } from "../store/chats/actions";
 import { selectCurrentChatId } from "../store/chats/selectors";
 
 const Form = () => {
@@ -18,9 +17,7 @@ const Form = () => {
     if (value === "") {
       return;
     }
-    dispatch(
-      sendMessage({ text: value, author: AUTHORS.human }, currentChatId)
-    );
+    dispatch(addMessageWithBotReply(value, currentChatId));
     textInput.current.focus();
     textInput.current.value = "";
   };
