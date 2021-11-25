@@ -4,12 +4,12 @@ import Button from "@mui/material/Button";
 import { Box } from "@mui/system";
 import { useDispatch, useSelector } from "react-redux";
 import { addMessageWithBotReply } from "../store/chats/actions";
-import { selectCurrentChatId } from "../store/chats/selectors";
+import { selectCurrentChat } from "../store/chats/selectors";
 
 const Form = () => {
   const textInput = useRef(null);
   const dispatch = useDispatch();
-  const currentChatId = useSelector(selectCurrentChatId);
+  const currentChat = useSelector(selectCurrentChat);
 
   const handleSubmit = (event) => {
     const value = textInput.current.value.trim();
@@ -17,14 +17,14 @@ const Form = () => {
     if (value === "") {
       return;
     }
-    dispatch(addMessageWithBotReply(value, currentChatId));
+    dispatch(addMessageWithBotReply(value, currentChat.id));
     textInput.current.focus();
     textInput.current.value = "";
   };
 
   useEffect(() => {
     textInput.current.focus();
-  }, [currentChatId]);
+  }, [currentChat]);
 
   return (
     <Box
@@ -46,7 +46,7 @@ const Form = () => {
         placeholder="Print your message"
         autoFocus
         inputRef={textInput}
-        disabled={!currentChatId}
+        disabled={!currentChat}
         sx={{
           flexGrow: 1,
         }}
