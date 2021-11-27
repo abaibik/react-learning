@@ -4,15 +4,19 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router } from "react-router-dom";
-import store from "./store";
+import { persistor, store } from "./store";
 import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import { CircularProgress } from "@mui/material";
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Router>
-        <App />
-      </Router>
+      <PersistGate persistor={persistor} loading={<CircularProgress />}>
+        <Router>
+          <App />
+        </Router>
+      </PersistGate>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")
