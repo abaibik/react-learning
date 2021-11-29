@@ -5,43 +5,32 @@ import {
   ListItem,
   Typography,
 } from "@mui/material";
-import { useEffect, useState } from "react";
-import { API } from "../utils";
+import { useCallback, useEffect } from "react";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import HealingIcon from "@mui/icons-material/Healing";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectNewsError,
+  selectNewsList,
+  selectNewsLoading,
+} from "../store/news/selectors";
+import { getNews } from "../store/news/actions";
 
 export const News = () => {
-  const [news, setNews] = useState([]);
-  const [error, setError] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const news = useSelector(selectNewsList);
+  const isLoading = useSelector(selectNewsLoading);
+  const error = useSelector(selectNewsError);
 
-  const requestNews = async () => {
-    setLoading(true);
-    try {
-      const response = await fetch(
-        `${API.url}?access_key=${API.access_key}& categories = ${API.categories}& languages = ${API.languages}`
-      );
-
-      if (!response.ok) {
-        throw new Error("Something wrong");
-      }
-      const result = await response.json();
-
-      setError(false);
-      setNews(result.data);
-    } catch (err) {
-      setError(true);
-      console.warn(err);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const requestNews = useCallback(async () => {
+    dispatch(getNews());
+  }, [dispatch]);
 
   useEffect(() => {
     requestNews();
-  }, []);
+  }, [requestNews]);
 
   return (
     <>
@@ -58,14 +47,11 @@ export const News = () => {
         Health News
       </Typography>
 
-      {loading ? (
+      {isLoading ? (
         <CircularProgress />
       ) : (
         <>
-          <Button onClick={requestNews}>Refresh news</Button>
-          {error && (
-            <Typography variant="h4">Error. The page not found</Typography>
-          )}
+          {!!error && <Typography variant="h4">Error: {error}</Typography>}
 
           <List>
             {news.map((n) => (
@@ -79,6 +65,13 @@ export const News = () => {
               </ListItem>
             ))}
           </List>
+          <Button
+            variant="outlined"
+            sx={{ textAlign: "center", marginTop: "2rem", marginLeft: "2rem" }}
+            onClick={requestNews}
+          >
+            Refresh news
+          </Button>
         </>
       )}
     </>
