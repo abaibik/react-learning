@@ -15,6 +15,10 @@ export default function Home() {
       <ListItem disablePadding>
         <Link to="/chats">Chats</Link>
       </ListItem>
+
+      <ListItem disablePadding>
+        <Link to="/News">News</Link>
+      </ListItem>
     </List>
   );
 }
