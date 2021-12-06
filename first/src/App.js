@@ -6,7 +6,6 @@ import Glass from "./components/Glass";
 import Profile from "./components/Profile";
 import Chats from "./components/Chats";
 import Home from "./components/Home";
-import Bot from "./components/Bot";
 
 function App() {
   return (
@@ -19,7 +18,6 @@ function App() {
             <Route path=":chatId" element={<Chats />} />
           </Route>
         </Routes>
-        <Bot />
       </Glass>
     </ThemeProvider>
   );

@@ -11,7 +11,13 @@ const ChatList = () => {
   const chatList = useSelector(selectChatList);
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", marginLeft: "2vw" }}>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        marginLeft: "2vw",
+      }}
+    >
       <Box
         sx={{
           margin: "3rem",
