@@ -15,6 +15,7 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(
   persistConfig,
+
   combineReducers({
     profile: profileReducer,
     chats: chatsReducer,

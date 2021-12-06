@@ -8,6 +8,7 @@ import Chats from "./components/Chats";
 import Home from "./components/Home";
 import { News } from "./components/News";
 
+
 function App() {
   return (
     <ThemeProvider theme={theme}>
