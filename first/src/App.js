@@ -7,6 +7,8 @@ import Profile from "./components/Profile";
 import Chats from "./components/Chats";
 import Home from "./components/Home";
 import { News } from "./components/News";
+import { SignForm } from "./components/SignForm";
+import SignUp from "./components/SignUp";
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
       <Glass>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/login" element={<SignForm />}></Route>
+          <Route path="/signup" element={<SignUp />}></Route>
           <Route index path="/profile" element={<Profile />} />
           <Route path="/News" element={<News />} />
           <Route path="/chats" element={<Chats />}>
