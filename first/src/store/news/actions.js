@@ -22,7 +22,8 @@ export const getNews = () => async (dispatch) => {
   dispatch(getNewsLoading());
   try {
     const response = await fetch(
-      `${API.url}?access_key=${API.access_key}&categories=${API.categories}&languages=${API.languages}&limit=${API.limit}`
+      // `${API.url}?access_key=${API.access_key}&categories=${API.categories}&languages=${API.languages}&limit=${API.limit}`
+      API.url
     );
 
     if (!response.ok) {
