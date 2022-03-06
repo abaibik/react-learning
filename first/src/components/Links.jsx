@@ -1,4 +1,4 @@
-import { AppBar, BottomNavigation, Toolbar, Typography } from "@mui/material";
+import { BottomNavigation, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
 export default function Links() {

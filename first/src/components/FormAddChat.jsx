@@ -3,6 +3,7 @@ import { Box } from "@mui/system";
 import { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { addChat } from "../store/chats/actions";
+import Links from "./Links";
 
 export default function FormAddChat() {
   const inputRef = useRef();
@@ -52,6 +53,7 @@ export default function FormAddChat() {
       <Button type="submit" variant="outlined">
         Add
       </Button>
+      <Links />
     </Box>
   );
 }

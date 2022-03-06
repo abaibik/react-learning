@@ -17,6 +17,8 @@ import {
   selectNewsLoading,
 } from "../store/news/selectors";
 import { getNews } from "../store/news/actions";
+import Links from "./Links";
+import { Box } from "@mui/system";
 
 export const News = () => {
   const dispatch = useDispatch();
@@ -72,6 +74,9 @@ export const News = () => {
           >
             Refresh news
           </Button>
+          <Box style={{ marginTop: "1rem" }}>
+            <Links />
+          </Box>
         </>
       )}
     </>

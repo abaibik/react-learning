@@ -5,7 +5,6 @@ import { Routes, Route } from "react-router-dom";
 import Glass from "./components/Glass";
 import Chats from "./components/Chats";
 import { News } from "./components/News";
-import Links from "./components/Links";
 
 function App() {
   return (
@@ -17,7 +16,6 @@ function App() {
             <Route path=":chatId" element={<Chats />} />
           </Route>
         </Routes>
-        <Links />
       </Glass>
     </ThemeProvider>
   );
